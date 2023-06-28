@@ -8,6 +8,6 @@
 </template>
 
 <style lang="scss">
-@use '/main.scss';
+@use './style/main.scss';
 
 </style>
