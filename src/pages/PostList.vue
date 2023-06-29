@@ -26,8 +26,8 @@ export default{
 </script>
 
 <template>
-<h1 class="mb-5 mt-1">Projects in front</h1>
-ciaoooooo
+<h1 class="mb-5 mt-1 container">Projects in front</h1>
+
 
 <div class="container">
     <div class="row">
