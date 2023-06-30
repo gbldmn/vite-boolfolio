@@ -7,11 +7,13 @@ export default{
     data(){
         return{
             projects: [],
-            baseUrl: 'http://127.0.0.1:8000'
+            baseUrl: 'http://127.0.0.1:8000',
+            types: null
         }
     },
     mounted(){
         this.getProjects();
+        this.getTypes();
     },
     methods: {
         getProjects(){
@@ -19,6 +21,11 @@ export default{
                 .then( res => {
                     this.projects = res.data.projects
                 } )
+        },
+        getTypes(){
+            axios.get(`${this.baseUrl}/api/types`).then( res => {
+                this.types = res.data.types
+            })
         }
     },
 }
@@ -30,6 +37,18 @@ export default{
 
 
 <div class="container">
+
+
+    <div class="mb-3">
+        <label for="" class="form-label">filtro di tipologie </label>
+
+        <select class="form-select form-select-lg" name="" id="">
+            <option v-for="(elem,index) in types " :key="index">{{ elem.name }}</option>
+
+        </select>
+    </div>
+
+
     <div class="row">
         <div class="col-4" v-for="(elem, index) in projects" :key="index">
             <div class="card">
