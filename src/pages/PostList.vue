@@ -8,7 +8,8 @@ export default{
         return{
             projects: [],
             baseUrl: 'http://127.0.0.1:8000',
-            types: null
+            types: null,
+            selectedType: "all"
         }
     },
     mounted(){
@@ -17,7 +18,16 @@ export default{
     },
     methods: {
         getProjects(){
-            axios.get( `${this.baseUrl}/api/projects` )
+
+            const params = {
+
+            };
+
+            if( this.selectedType !== 'all'){
+                params.type_id = this.selectedType
+            }
+
+            axios.get( `${this.baseUrl}/api/projects`, { params } )
                 .then( res => {
                     this.projects = res.data.projects
                 } )
@@ -42,8 +52,9 @@ export default{
     <div class="mb-3">
         <label for="" class="form-label">filtro di tipologie </label>
 
-        <select class="form-select form-select-lg" name="" id="">
-            <option v-for="(elem,index) in types " :key="index">{{ elem.name }}</option>
+        <select @change=" getProjects() " v-model="selectedType" class="form-select form-select-lg" name="" id="">
+            <option value="all"> -- all --</option>
+            <option :value="elem.id" v-for="(elem,index) in types " :key="index">{{ elem.name }}</option>
 
         </select>
     </div>
