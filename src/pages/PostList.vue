@@ -19,9 +19,7 @@ export default{
     methods: {
         getProjects(){
 
-            const params = {
-
-            };
+            const params = { };
 
             if( this.selectedType !== 'all'){
                 params.type_id = this.selectedType
@@ -65,7 +63,7 @@ export default{
             <div class="card">
                 <img class="card-img-top" :src="`${baseUrl}/storage/${elem.cover_image}`" alt="title">
                 <div class="card-body">
-                    <router-link :to="{ name: 'post', params: { slug: elem.slug} }" class="btn btn-primary">
+                    <router-link :to="{ name: 'post', params: { slug: elem.slug} }" class="">
                         <h4 class="card-title">{{ elem.title }}</h4></router-link>
                     <p class="card-text">{{ elem.content }}</p>
                     <div>

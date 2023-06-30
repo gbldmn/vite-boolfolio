@@ -36,4 +36,11 @@ export default {
 
 </script>
 
-<style lang="scss"></style>
+<style lang="scss" scoped>
+
+.nav-link:hover {
+  background-color: lightblue;
+  border-radius: 20px;
+}
+
+</style>

@@ -16,6 +16,11 @@ export default{
         this.getSinglePost();
     },
     methods: {
+
+        goBack(){
+            this.$router.back();
+        },
+
         getSinglePost(){
             
             axios.get(`${this.baseUrl}/api/projects/${this.$route.params.slug}`).then((response) => {
@@ -46,6 +51,11 @@ export default{
             {{ elem.name }}
         </li>
     </ul>
+  </div>
+
+
+  <div class="container">
+    <a href="" @click.prevent="goBack" class="btn btn-primary">torna indietro</a>
   </div>
 </template>
 
