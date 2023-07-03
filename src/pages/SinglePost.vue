@@ -24,7 +24,7 @@ export default{
         getSinglePost(){
             
             axios.get(`${this.baseUrl}/api/projects/${this.$route.params.slug}`).then((response) => {
-                console.log(response);
+               
                 if (response.data) {
                     
                 this.post = response.data.post;

@@ -10,21 +10,21 @@ export default{
             baseUrl: 'http://127.0.0.1:8000',
             types: null,
             selectedType: "all",
-            technologies: null,
-            selectedTechnologies: []
+             technologies: null,
+             selectedTechnologies: []
         }
     },
     mounted(){
         this.getProjects();
         this.getTypes();
-        this.getTechnologies();
+         this.getTechnologies();
     },
-    watch: {
-        selectedTechologies:{
-            handler: 'getProjects',
-            deep: true
-        }
-    },
+      watch: {
+          selectedTechologies:{
+              handler: 'getProjects',
+              deep: true
+          }
+     },
     methods: {
         getProjects(){
 
@@ -34,9 +34,9 @@ export default{
                 params.type_id = this.selectedType
             }
 
-            if( this.selectedTechnologies.length > 0 ){
-                params.technologies_id = this.selectedTechnologies.join(',');
-            }
+             if( this.selectedTechnologies.length > 0 ){
+                 params.technologies_id = this.selectedTechnologies.join(',');
+             }
 
             axios.get( `${this.baseUrl}/api/projects`, { params } )
                 .then( res => {
@@ -44,15 +44,16 @@ export default{
                 } )
         },
         getTypes(){
-            axios.get(`${this.baseUrl}/api/types`).then( res => {
+            axios.get(`${this.baseUrl}/api/types`)
+            .then( res => {
                 this.types = res.data.types
             })
         },
-        getTechnologies(){
-            axios.get(`${this.baseUrl}/api/technologies`).then( res => {
-                this.technologies = res.data.technologies
-            })
-        }
+         getTechnologies(){
+             axios.get(`${this.baseUrl}/api/technologies`).then( res => {
+                 this.technologies = res.data.technologies
+             })
+         }
 
     },
 }
@@ -76,13 +77,13 @@ export default{
         </select>
     </div>
 
-    <div class="mb-3">
+      <div class="mb-3">
         <h2>filtra per tecnologie</h2>
         <label for="" v-for="(elem, index) in technologies" :key="index">
             <input type="checkbox" :value="elem.id" v-model="selectedTechnologies">
-            <!-- {{ elem.name }} -->
+            {{ elem.name }}
         </label>
-    </div>
+    </div> 
 
 
     <div class="row">
