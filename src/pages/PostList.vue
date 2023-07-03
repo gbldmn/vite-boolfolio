@@ -9,12 +9,21 @@ export default{
             projects: [],
             baseUrl: 'http://127.0.0.1:8000',
             types: null,
-            selectedType: "all"
+            selectedType: "all",
+            technologies: null,
+            selectedTechnologies: []
         }
     },
     mounted(){
         this.getProjects();
         this.getTypes();
+        this.getTechnologies();
+    },
+    watch: {
+        selectedTechologies:{
+            handler: 'getProjects',
+            deep: true
+        }
     },
     methods: {
         getProjects(){
@@ -23,6 +32,10 @@ export default{
 
             if( this.selectedType !== 'all'){
                 params.type_id = this.selectedType
+            }
+
+            if( this.selectedTechnologies.length > 0 ){
+                params.technologies_id = this.selectedTechnologies.join(',');
             }
 
             axios.get( `${this.baseUrl}/api/projects`, { params } )
@@ -34,7 +47,13 @@ export default{
             axios.get(`${this.baseUrl}/api/types`).then( res => {
                 this.types = res.data.types
             })
+        },
+        getTechnologies(){
+            axios.get(`${this.baseUrl}/api/technologies`).then( res => {
+                this.technologies = res.data.technologies
+            })
         }
+
     },
 }
 
@@ -55,6 +74,14 @@ export default{
             <option :value="elem.id" v-for="(elem,index) in types " :key="index">{{ elem.name }}</option>
 
         </select>
+    </div>
+
+    <div class="mb-3">
+        <h2>filtra per tecnologie</h2>
+        <label for="" v-for="(elem, index) in technologies" :key="index">
+            <input type="checkbox" :value="elem.id" v-model="selectedTechnologies">
+            <!-- {{ elem.name }} -->
+        </label>
     </div>
 
 
